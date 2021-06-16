@@ -1,15 +1,19 @@
 {
-  "name": "v1.0.0",
-  "version": "0.1.0",
-  "private": true,
+  "name": "x-websocket",
+  "description": "Easy Websocket Client Package",
+  "keywords": [
+    "websocket",
+    "socket"
+  ],
+  "version": "1.0.0",
+  "private": false,
+  "license": "MIT",
+  "main": "lib/xwebsocket.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name xwebsocket --dest lib packages/XWebSocket/index.js"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -17,9 +21,12 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "babel-eslint": "^10.1.0",
+    "core-js": "^3.6.5",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
+    "vue": "^2.6.11",
+    "vue-router": "^3.5.1",
     "vue-template-compiler": "^2.6.11"
   }
 }
