@@ -7,7 +7,7 @@
 >
 [Demo](https://mikexia930.github.io/xWebsocket/)
 ## 版本
-- v1.0.1
+- v1.0.2
 
 ## 基于
 - websocket

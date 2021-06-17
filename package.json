@@ -5,7 +5,7 @@
     "websocket",
     "socket"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "license": "MIT",
   "main": "lib/xwebsocket.umd.js",
