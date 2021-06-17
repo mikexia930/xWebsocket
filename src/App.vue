@@ -4,10 +4,10 @@
       <router-view/>
     </div>
     <div class="btn">
-      <router-link to="/socket1">socket1</router-link>
-      <router-link to="/socket2">socket2</router-link>
-      <router-link to="/other1">other1</router-link>
-      <router-link to="/other2">other2</router-link>
+      <router-link to="/socket1">socket1 [单条上报]</router-link>
+      <router-link to="/socket2">socket2 [并发上报]</router-link>
+      <router-link to="/other1">other1 [无socket]</router-link>
+      <router-link to="/other2">other2 [无socket]</router-link>
     </div>
   </div>
 </template>

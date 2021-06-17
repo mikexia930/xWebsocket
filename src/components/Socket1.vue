@@ -17,13 +17,13 @@ export default {
   },
   mounted() {
     this.XWebsocket.sendMessage(JSON.stringify(['data', {
-      test: '123',
+      test: 'single',
     }]));
     this.XWebsocket.getMessage(this.showMessage);
   },
   methods: {
     showMessage(message) {
-      this.messages.push(JSON.stringify(message));
+      this.messages.push(JSON.stringify(message.data));
     },
   },
 };

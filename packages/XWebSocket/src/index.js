@@ -58,6 +58,7 @@ export default class XWebSocket {
       this.clearPing();
     };
     this.socketIns.onopen = () => {
+      console.log('onopen123');
       this.curReconnectTimes = 0;
       this.ping();
       this.consumeQueue();
@@ -147,7 +148,7 @@ export default class XWebSocket {
   /**
    * 发送心跳
    */
-  pingInterval;
+  pingInterval = null;
 
   ping() {
     if (this.pingConfig.time > 0 && !this.pingInterval) {
@@ -163,6 +164,7 @@ export default class XWebSocket {
   clearPing() {
     if (this.pingInterval) {
       clearInterval(this.pingInterval);
+      this.pingInterval = null;
     }
   }
 }
