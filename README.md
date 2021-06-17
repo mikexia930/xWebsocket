@@ -4,9 +4,10 @@
 >消息发送，采用队列模式，避免open和error时候，上报的数据丢失。
 > 
 > 内置的心跳采用定时器，可以设置time为0，不使用内置心跳。
-> 
+>
+[Demo](https://mikexia930.github.io/xWebsocket/)
 ## 版本
-- v1.0.0
+- v1.0.1
 
 ## 基于
 - websocket
