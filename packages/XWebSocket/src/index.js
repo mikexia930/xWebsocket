@@ -29,11 +29,14 @@ export default class XWebSocket {
    * 获取请求实例
    * @return object
    */
-  getSocketIns() {
+  getSocketIns(socketUrl = '') {
     if (typeof WebSocket === 'undefined') {
       throw (new Error('not support websocket'));
     } else {
       if (!this.socketIns) {
+        if (socketUrl) {
+          this.socketUrl = socketUrl;
+        }
         this.setSocketIns();
       }
       return this.socketIns;
@@ -58,7 +61,6 @@ export default class XWebSocket {
       this.clearPing();
     };
     this.socketIns.onopen = () => {
-      console.log('onopen123');
       this.curReconnectTimes = 0;
       this.ping();
       this.consumeQueue();
@@ -131,6 +133,13 @@ export default class XWebSocket {
     if (this.getState() === 1) {
       this.socketIns.close();
     }
+  }
+
+  /**
+   * 清除实例
+   */
+  destroy() {
+    this.socketIns = null;
   }
 
   /**
