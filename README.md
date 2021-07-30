@@ -1,4 +1,5 @@
 # x-websocket
+>
 >WebSocket的前端封装。
 > 
 >消息发送，采用队列模式，避免open和error时候，上报的数据丢失。
@@ -7,7 +8,7 @@
 >
 [Demo](https://mikexia930.github.io/xWebsocket/)
 ## 版本
-- v1.0.2
+- v1.0.5
 
 ## 基于
 - websocket
@@ -16,8 +17,16 @@
 ```
 npm install x-websocket
 ```
-
-## 使用， Vue示例
+或者
+```
+github下载源码
+```
+## 使用
+**直接用script引入**
+```
+<script src="xWebsocket/lib/xwebsocket.umd.js"></script>
+```
+#### Vue示例
 **在main.js引入**
 ```
 import XWebsocketd from 'x-websocket';
@@ -37,8 +46,9 @@ Vue.prototype.XWebsocket = new XWebSocket(
 
 **在组件中使用，建立连接**
 ```
+// 可以不传也可以使用socketUrl参数覆盖new时候的socket地址
 try {
-    this.XWebsocket.getSocketIns();
+    this.XWebsocket.getSocketIns(socketUrl?);
 } catch (err) {
     console.log('socket:', err);
 }
@@ -61,4 +71,7 @@ this.XWebsocket.close();
 ```
 this.XWebsocket.getState(); // undefined：无实例，0：连接中 1：已连接 2：关闭中 3：已关闭
 ```
-
+**销毁当前实例**
+```
+this.XWebsocket.destroy();
+```
