@@ -13,6 +13,8 @@ export default class XWebSocket {
 
   curReconnectTimes = 0;
 
+  handleMessage;
+
   constructor(
     socketUrl,
     protocols = {},
@@ -29,13 +31,16 @@ export default class XWebSocket {
    * 获取请求实例
    * @return object
    */
-  getSocketIns(socketUrl = '') {
+  getSocketIns(socketUrl = '', handleMessage) {
     if (typeof WebSocket === 'undefined') {
       throw (new Error('not support websocket'));
     } else {
       if (!this.socketIns) {
         if (socketUrl) {
           this.socketUrl = socketUrl;
+        }
+        if (handleMessage) {
+          this.handleMessage = handleMessage;
         }
         this.setSocketIns();
       }
@@ -53,18 +58,32 @@ export default class XWebSocket {
     } else {
       this.socketIns = new WebSocket(this.socketUrl);
     }
-    this.socketIns.onerror = () => {
+    this.socketIns.onerror = (err) => {
       this.reconnect();
+      if (this.handleMessage) {
+        this.handleMessage({
+          type: 'error',
+          data: err,
+        });
+      }
     };
     // 监听关闭状态触发
     this.socketIns.onclose = () => {
       this.clearPing();
+      if (this.handleMessage) {
+        this.handleMessage({
+          type: 'close',
+        });
+      }
     };
     this.socketIns.onopen = () => {
       this.curReconnectTimes = 0;
       this.ping();
       this.consumeQueue();
     };
+    if (this.handleMessage) {
+      this.socketIns.onmessage = this.handleMessage;
+    }
   }
 
   /**
@@ -80,6 +99,7 @@ export default class XWebSocket {
    * @param handleServeMessage function
    */
   getMessage(handleServeMessage) {
+    this.handleMessage = handleServeMessage;
     this.socketIns.onmessage = handleServeMessage;
   }
 
@@ -162,6 +182,10 @@ export default class XWebSocket {
   ping() {
     if (this.pingConfig.time > 0 && !this.pingInterval) {
       this.pingInterval = setInterval(() => {
+        this.handleMessage({
+          type: 'ping',
+          data: this.pingConfig.message,
+        });
         this.sendMessage(this.pingConfig.message);
       }, (this.pingConfig.time * 1000));
     }

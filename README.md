@@ -8,7 +8,7 @@
 >
 [Demo](https://mikexia930.github.io/xWebsocket/)
 ## 版本
-- v1.0.5
+- v1.1.0
 
 ## 基于
 - websocket
@@ -48,15 +48,36 @@ Vue.prototype.XWebsocket = new XWebSocket(
 ```
 // 可以不传也可以使用socketUrl参数覆盖new时候的socket地址
 try {
-    this.XWebsocket.getSocketIns(socketUrl?);
+    this.XWebsocket.getSocketIns(socketUrl?, handleMessage?);
 } catch (err) {
     console.log('socket:', err);
 }
+
+// handleMessage 为初始接收消息的处理函数 (message) => { 处理接收的信息 }，可不填
+//  * 不填需要手动设置 this.XWebsocket.getMessage
+//  * this.XWebsocket.getMessage 不会捕获上报的 ping 和 onclose 消息。
+// 上报的ping 和 onclose 信息也会被封装在 message里，通过 message.type 获取 ping / close
+function handleMessage(message) {
+    const { type, data } = message;
+    switch(type) {
+        case 'ping':
+            // 上报的 ping 数据
+            break;
+        case 'close':
+            // onclose 触发
+            break;
+        default:
+            // 接收的数据
+            break;
+    }
+}
 ```
+
 **发送消息**
 ```
 this.XWebsocket.sendMessage(消息内容);
 ```
+
 **接收消息**
 ```
 this.XWebsocket.getMessage((message) => {

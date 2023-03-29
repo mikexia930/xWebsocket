@@ -36,7 +36,7 @@ export default {
     },
     getSocket() {
       try {
-        this.XWebsocket.getSocketIns();
+        this.XWebsocket.getSocketIns('', );
       } catch (err) {
         console.log('socket:', err);
       }
