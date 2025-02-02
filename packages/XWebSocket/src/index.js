@@ -200,4 +200,16 @@ export default class XWebSocket {
       this.pingInterval = null;
     }
   }
+
+  /**
+   * 心跳数据配置
+   */
+  setPingConfig(time, message) {
+    if (this.pingInterval) {
+      clearInterval(this.pingInterval);
+      this.pingConfig.time = time;
+      this.pingConfig.message = message;
+      this.ping();
+    }
+  }
 }

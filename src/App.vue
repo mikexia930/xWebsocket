@@ -36,7 +36,7 @@ export default {
     },
     getSocket() {
       try {
-        this.XWebsocket.getSocketIns('', );
+        this.XWebsocket.getSocketIns('wss://cs-beta3.dev.tapdb.net/evtws/analysis?projectId=977&lang=zh_CN');
       } catch (err) {
         console.log('socket:', err);
       }

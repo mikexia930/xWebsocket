@@ -11,7 +11,7 @@ Vue.prototype.XWebsocket = new XWebSocket(
   10,
   {
     time: 5,
-    message: 'heartbeat',
+    message: ['heartbeat', ''],
   },
 );
 
